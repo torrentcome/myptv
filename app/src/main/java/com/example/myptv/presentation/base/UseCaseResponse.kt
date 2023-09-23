@@ -1,4 +1,4 @@
-package com.example.myptv.data.base
+package com.example.myptv.presentation.base
 
 import java.lang.Exception
 

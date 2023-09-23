@@ -55,11 +55,12 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
-    //Koin Libs
+    // koin
     val koin_version = "3.1.6"
     implementation("io.insert-koin:koin-android:$koin_version")
     implementation("io.insert-koin:koin-android-compat:$koin_version")
     implementation("io.insert-koin:koin-core:$koin_version")
+    implementation("org.koin:koin-android-viewmodel:$koin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
 
     implementation("io.coil-kt:coil:1.0.0")

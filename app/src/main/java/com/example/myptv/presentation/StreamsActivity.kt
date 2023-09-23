@@ -1,23 +1,20 @@
 package com.example.myptv.presentation
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myptv.R
-import com.example.myptv.data.model.Stream
 import com.example.myptv.databinding.ActivityStreamsBinding
+import com.google.android.material.snackbar.Snackbar
 
 class StreamsActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityStreamsBinding
-    private var adapter: StreamAdapter? = StreamAdapter()
-    private val streamsViewModel: StreamsViewModel by viewModel()
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,15 +32,6 @@ class StreamsActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        if (isNetworkAvailable()) {
-            stream.getPosts()
-        } else {
-            Toast.makeText(
-                this,
-                getString(R.string.no_internet_connection),
-                LENGTH_SHORT
-            ).show()
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -51,4 +39,5 @@ class StreamsActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
 }

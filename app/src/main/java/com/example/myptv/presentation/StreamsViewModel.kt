@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myptv.data.base.UseCaseResponse
+import com.example.myptv.presentation.base.UseCaseResponse
 import com.example.myptv.data.model.Stream
 import com.example.myptv.domain.GetStreamsUseCase
 import kotlinx.coroutines.cancel
