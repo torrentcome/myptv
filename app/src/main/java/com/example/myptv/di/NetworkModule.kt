@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single { createService(get()) }
-    single { createRetrofit(get(), "https://iptv-org.github.io/api") }
+    single { createRetrofit(get(), "https://iptv-org.github.io/api/") }
     single { createOkHttpClient() }
 }
 
@@ -28,8 +28,8 @@ fun createOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
     return OkHttpClient.Builder()
-        .connectTimeout(5, TimeUnit.SECONDS)
-        .readTimeout(5, TimeUnit.SECONDS)
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor).build()
 }
 

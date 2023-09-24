@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.myptv"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.myptv"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -60,7 +60,6 @@ dependencies {
     implementation("io.insert-koin:koin-android:$koin_version")
     implementation("io.insert-koin:koin-android-compat:$koin_version")
     implementation("io.insert-koin:koin-core:$koin_version")
-    implementation("org.koin:koin-android-viewmodel:$koin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
 
     implementation("io.coil-kt:coil:1.0.0")

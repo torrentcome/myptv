@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -17,8 +19,7 @@
         <activity
             android:name=".presentation.StreamsActivity"
             android:exported="true"
-            android:label="@string/title_activity_streams"
-            android:theme="@style/Theme.Myptv">
+            android:label="@string/title_activity_streams">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

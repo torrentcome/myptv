@@ -12,30 +12,30 @@ import com.example.myptv.data.model.Subdivision
 import retrofit2.http.GET
 
 interface ApiInterface {
-    @GET("/blocklist.json")
+    @GET("blocklist.json")
     suspend fun getBlocklist(): List<Block>
 
-    @GET("/regions.json")
+    @GET("regions.json")
     suspend fun getRegions(): List<Region>
 
-    @GET("/subdivisions.json")
+    @GET("subdivisions.json")
     suspend fun getSubdivisions(): List<Subdivision>
 
-    @GET("/countries.json")
+    @GET("countries.json")
     suspend fun getCountries(): List<Country>
 
-    @GET("/languages.json")
+    @GET("languages.json")
     suspend fun getLanguages(): List<Language>
 
-    @GET("/categories.json")
+    @GET("categories.json")
     suspend fun getCategories(): List<Category>
 
-    @GET("/guides.json")
+    @GET("guides.json")
     suspend fun getGuides(): List<Guide>
 
-    @GET("/channels.json")
+    @GET("channels.json")
     suspend fun getChannels(): List<Channel>
 
-    @GET("/streams.json")
+    @GET("streams.json")
     suspend fun getStreams(): List<Stream>
 }

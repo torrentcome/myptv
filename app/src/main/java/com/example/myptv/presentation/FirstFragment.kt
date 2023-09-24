@@ -12,9 +12,6 @@ import com.example.myptv.databinding.FragmentFirstBinding
 import com.example.myptv.ext.isNetworkAvailable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
     private var adapter: StreamsAdapter? = StreamsAdapter()
     private val streamsViewModel: StreamsViewModel by viewModel()

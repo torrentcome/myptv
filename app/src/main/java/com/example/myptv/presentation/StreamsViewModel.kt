@@ -23,14 +23,16 @@ class StreamsViewModel constructor(private val getStreamsUseCase: GetStreamsUseC
         showProgressbar.value = true
         getStreamsUseCase.invoke(viewModelScope, null, object : UseCaseResponse<List<Stream>> {
                 override fun onSuccess(result: List<Stream>) {
+                    Log.i(TAG, "result size ${result.size}")
                     Log.i(TAG, "result: $result")
-                    streamsData.value = result
-                    showProgressbar.value = false
+                    streamsData.value = result.subList(0, 20)
+                    //showProgressbar.value = false
                 }
 
                 override fun onError(exception: Exception?) {
                     messageData.value = exception?.message
-                    showProgressbar.value = false
+                    Log.i(TAG, "error : ${exception?.message}")
+                    // showProgressbar.value = false
                 }
             },
         )
