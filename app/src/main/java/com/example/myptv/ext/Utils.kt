@@ -11,13 +11,10 @@ class Utils {
 }
 fun Context.isNetworkAvailable(): Boolean {
     val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }
-
-    //Internet connectivity check in Android Q
     val networks = connectivityManager.allNetworks
     var hasInternet = false
     if (networks.isNotEmpty()) {

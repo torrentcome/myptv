@@ -1,35 +1,38 @@
 package com.example.myptv.presentation
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myptv.data.model.Stream
 import com.example.myptv.databinding.ActivityStreamsBinding
 import com.example.myptv.databinding.FragmentFirstBinding
+import com.example.myptv.databinding.RowStreamBinding
 import kotlin.properties.Delegates
 
+@SuppressLint("NotifyDataSetChanged")
 class StreamsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var mStreamList: List<Stream> by Delegates.observable(emptyList()) { _, _, _ ->
+    var list: List<Stream> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val itemBinding = FragmentFirstBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = RowStreamBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return StreamViewHolder(itemBinding)
     }
 
-    override fun getItemCount(): Int = if (mStreamList.isNullOrEmpty()) 0 else mStreamList.size
+    override fun getItemCount(): Int = if (list.isEmpty()) 0 else list.size
 
-    private fun getItem(position: Int): Stream = mStreamList[position]
+    private fun getItem(position: Int): Stream = list[position]
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as StreamViewHolder).onBind(getItem(position))
     }
 
-    private inner class StreamViewHolder(private val itemBinding : FragmentFirstBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    private inner class StreamViewHolder(private val itemBinding : RowStreamBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun onBind(stream: Stream) {
-            itemBinding.stream = stream
+            itemBinding.textView.text = stream.toString()
         }
     }
 }

@@ -5,8 +5,19 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+
+    // network UseCases
     single { createRepoImpl(get()) }
     single { createGetStreamsUseCase(get()) }
+    single { createGetBlocklistUseCase(get()) }
+    single { createGetCategoriesUseCase(get()) }
+    single { createGetCountriesUseCase(get()) }
+    single { createGetGuidesUseCase(get()) }
+    single { createGetChannelsUseCase(get()) }
+    single { createGetLanguagesUseCase(get()) }
+    single { createGetRegionUseCase(get()) }
+    single { createGetSubdivisionsUseCase(get()) }
 
+    // presentation VM
     viewModel { StreamsViewModel(get()) }
 }
