@@ -1,4 +1,4 @@
-package com.example.myptv.data.model
+package com.example.myptv.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

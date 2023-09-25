@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myptv.data.model.Stream
-import com.example.myptv.databinding.ActivityStreamsBinding
-import com.example.myptv.databinding.FragmentFirstBinding
+import com.example.myptv.data.remote.model.Stream
 import com.example.myptv.databinding.RowStreamBinding
 import kotlin.properties.Delegates
 

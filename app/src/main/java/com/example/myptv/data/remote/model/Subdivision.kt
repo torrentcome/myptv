@@ -1,8 +1,8 @@
-package com.example.myptv.data.model
+package com.example.myptv.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-class Subdivision(
+data class Subdivision(
     @SerializedName("country") var country: String? = null,
     @SerializedName("name") var name: String? = null,
     @SerializedName("code") var code: String? = null

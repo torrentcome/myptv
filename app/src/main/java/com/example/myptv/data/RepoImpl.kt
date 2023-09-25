@@ -1,18 +1,15 @@
 package com.example.myptv.data
 
-import com.example.myptv.data.model.Block
-import com.example.myptv.data.model.Category
-import com.example.myptv.data.model.Channel
-import com.example.myptv.data.model.Country
-import com.example.myptv.data.model.Guide
-import com.example.myptv.data.model.Language
-import com.example.myptv.data.model.Region
-import com.example.myptv.data.model.Repo
-import com.example.myptv.data.model.Stream
-import com.example.myptv.data.model.Subdivision
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.Response
+import com.example.myptv.data.remote.model.Block
+import com.example.myptv.data.remote.model.Category
+import com.example.myptv.data.remote.model.Channel
+import com.example.myptv.data.remote.model.Country
+import com.example.myptv.data.remote.model.Guide
+import com.example.myptv.data.remote.model.Language
+import com.example.myptv.data.remote.model.Region
+import com.example.myptv.data.remote.ApiInterface
+import com.example.myptv.data.remote.model.Stream
+import com.example.myptv.data.remote.model.Subdivision
 
 class RepoImpl(private val api: ApiInterface) : Repo {
 

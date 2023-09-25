@@ -1,16 +1,16 @@
 package com.example.myptv.domain
 
 import com.example.myptv.data.RepoImpl
-import com.example.myptv.data.model.Block
-import com.example.myptv.data.model.Category
-import com.example.myptv.data.model.Channel
-import com.example.myptv.data.model.Country
-import com.example.myptv.data.model.Guide
-import com.example.myptv.data.model.Language
-import com.example.myptv.data.model.Region
+import com.example.myptv.data.remote.model.Block
+import com.example.myptv.data.remote.model.Category
+import com.example.myptv.data.remote.model.Channel
+import com.example.myptv.data.remote.model.Country
+import com.example.myptv.data.remote.model.Guide
+import com.example.myptv.data.remote.model.Language
+import com.example.myptv.data.remote.model.Region
 import com.example.myptv.domain.base.UseCase
-import com.example.myptv.data.model.Stream
-import com.example.myptv.data.model.Subdivision
+import com.example.myptv.data.remote.model.Stream
+import com.example.myptv.data.remote.model.Subdivision
 
 class GetStreamsUseCase constructor(private val repo: RepoImpl) : UseCase<List<Stream>, Any?>() {
     override suspend fun run(params: Any?): List<Stream> {

@@ -1,6 +1,6 @@
 package com.example.myptv.di
 
-import com.example.myptv.data.ApiInterface
+import com.example.myptv.data.remote.ApiInterface
 import com.example.myptv.data.RepoImpl
 import com.example.myptv.domain.GetBlocklistUseCase
 import com.example.myptv.domain.GetCategoriesUseCase

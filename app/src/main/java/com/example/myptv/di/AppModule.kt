@@ -6,8 +6,9 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    // network UseCases
     single { createRepoImpl(get()) }
+
+    // network UseCases
     single { createGetStreamsUseCase(get()) }
     single { createGetBlocklistUseCase(get()) }
     single { createGetCategoriesUseCase(get()) }

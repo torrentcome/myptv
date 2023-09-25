@@ -1,8 +1,8 @@
-package com.example.myptv.data.model
+package com.example.myptv.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-class Block(
+data class Block(
     @SerializedName("channel") var channel: String? = null,
     @SerializedName("ref") var ref: String? = null
 )
