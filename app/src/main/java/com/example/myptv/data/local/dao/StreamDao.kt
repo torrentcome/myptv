@@ -6,12 +6,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.myptv.data.remote.model.Stream
+import com.example.myptv.data.local.model.Stream
 
 @Dao
 interface StreamDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(stream: Stream): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(list: List<Stream>): List<Long>
 
     @Query("SELECT * FROM stream_table")
     fun loadAll(): MutableList<Stream>

@@ -1,5 +1,6 @@
 package com.example.myptv.data
 
+import com.example.myptv.data.local.AppDb
 import com.example.myptv.data.remote.model.Block
 import com.example.myptv.data.remote.model.Category
 import com.example.myptv.data.remote.model.Channel
@@ -11,7 +12,7 @@ import com.example.myptv.data.remote.ApiInterface
 import com.example.myptv.data.remote.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
 
-class RepoImpl(private val api: ApiInterface) : Repo {
+class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
 
     override suspend fun getBlocklist(): List<Block> {
         return api.getBlocklist()

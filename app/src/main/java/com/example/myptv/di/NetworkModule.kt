@@ -2,6 +2,7 @@ package com.example.myptv.di
 
 import com.example.myptv.data.remote.ApiInterface
 import com.example.myptv.data.RepoImpl
+import com.example.myptv.data.local.AppDb
 import com.example.myptv.domain.GetBlocklistUseCase
 import com.example.myptv.domain.GetCategoriesUseCase
 import com.example.myptv.domain.GetChannelsUseCase
@@ -45,8 +46,8 @@ fun createService(retrofit: Retrofit): ApiInterface {
     return retrofit.create(ApiInterface::class.java)
 }
 
-fun createRepoImpl(api: ApiInterface): RepoImpl {
-    return RepoImpl(api)
+fun createRepoImpl(api: ApiInterface, db: AppDb): RepoImpl {
+    return RepoImpl(api, db)
 }
 
 fun createGetStreamsUseCase(repo: RepoImpl): GetStreamsUseCase {

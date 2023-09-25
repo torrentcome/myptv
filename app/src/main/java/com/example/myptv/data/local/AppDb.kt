@@ -33,7 +33,7 @@ import com.example.myptv.data.local.model.Subdivision
         Stream::class,
         Subdivision::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class AppDb : RoomDatabase() {
     abstract val blockDao: BlockDao

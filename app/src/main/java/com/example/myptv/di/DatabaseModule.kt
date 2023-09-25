@@ -14,8 +14,8 @@ import com.example.myptv.data.local.dao.StreamDao
 import com.example.myptv.data.local.dao.SubdivisionDao
 import org.koin.dsl.module
 
-
 val databaseModule = module {
+
     single { createAppDatabase(get()) }
 
     single { createBlockDao(get()) }
