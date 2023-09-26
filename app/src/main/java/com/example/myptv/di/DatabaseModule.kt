@@ -26,7 +26,6 @@ val databaseModule = module {
     single { createLanguageDao(get()) }
     single { createRegionDao(get()) }
     single { createStreamDao(get()) }
-    single { createStreamDao(get()) }
     single { createSubdivisionDao(get()) }
 }
 
