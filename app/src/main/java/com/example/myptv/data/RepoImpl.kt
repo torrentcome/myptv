@@ -1,6 +1,8 @@
 package com.example.myptv.data
 
 import com.example.myptv.data.local.AppDb
+import com.example.myptv.data.map.Mapper
+import com.example.myptv.data.remote.ApiInterface
 import com.example.myptv.data.remote.model.Block
 import com.example.myptv.data.remote.model.Category
 import com.example.myptv.data.remote.model.Channel
@@ -8,7 +10,6 @@ import com.example.myptv.data.remote.model.Country
 import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
-import com.example.myptv.data.remote.ApiInterface
 import com.example.myptv.data.remote.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
 
@@ -47,6 +48,9 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
     }
 
     override suspend fun getStreams(): List<Stream> {
+        api.getStreams().forEach {
+            db.streamDao.insert(Mapper.map(it))
+        }
         return api.getStreams()
     }
 }

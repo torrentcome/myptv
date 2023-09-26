@@ -34,4 +34,40 @@ typealias DomainStream = com.example.myptv.domain.model.Stream
 typealias DomainSubdivision = com.example.myptv.domain.model.Subdivision
 
 object Mapper {
+    fun map(block: RemoteBlock) = LocalBlock(
+        channel = block.channel.toString(),
+        ref = block.ref
+    )
+
+    fun map(category: RemoteCategory) = LocalCategory(
+        id = category.id.toString(),
+        name = category.name
+    )
+
+    fun map(channel: RemoteChannel) = LocalChannel(
+        id = channel.id.toString(),
+        name = channel.name,
+        altNames = channel.altNames.toString(),
+        network = channel.network,
+        owners = channel.owners.toString(),
+        country = channel.country,
+        subdivision = channel.subdivision,
+        city = channel.city,
+        broadcastArea = channel.broadcastArea.toString(),
+        languages = channel.languages.toString(),
+        categories = channel.categories.toString(),
+        isNsfw = channel.isNsfw,
+        launched = channel.launched,
+        closed = channel.closed,
+        replacedBy = channel.replacedBy,
+        website = channel.website,
+        logo = channel.logo
+    )
+
+    fun map(stream: RemoteStream) = LocalStream(
+        channel = stream.channel.toString(),
+        url = stream.url,
+        httpReferrer = stream.httpReferrer,
+        userAgent = stream.userAgent
+    )
 }
