@@ -1,8 +1,9 @@
 package com.example.myptv.di
 
-import com.example.myptv.data.remote.ApiInterface
+import android.content.Context
 import com.example.myptv.data.RepoImpl
 import com.example.myptv.data.local.AppDb
+import com.example.myptv.data.remote.ApiInterface
 import com.example.myptv.domain.GetBlocklistUseCase
 import com.example.myptv.domain.GetCategoriesUseCase
 import com.example.myptv.domain.GetChannelsUseCase
@@ -12,6 +13,7 @@ import com.example.myptv.domain.GetLanguagesUseCase
 import com.example.myptv.domain.GetRegionUseCase
 import com.example.myptv.domain.GetStreamsUseCase
 import com.example.myptv.domain.GetSubdivisionsUseCase
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -22,15 +24,17 @@ import java.util.concurrent.TimeUnit
 val networkModule = module {
     single { createService(get()) }
     single { createRetrofit(get(), "https://iptv-org.github.io/api/") }
-    single { createOkHttpClient() }
+    single { createCache(get()) }
+    single { createOkHttpClient(get()) }
 }
 
-fun createOkHttpClient(): OkHttpClient {
+fun createOkHttpClient(cache: Cache): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
     return OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
+        .cache(cache)
         .addInterceptor(httpLoggingInterceptor).build()
 }
 
@@ -46,42 +50,25 @@ fun createService(retrofit: Retrofit): ApiInterface {
     return retrofit.create(ApiInterface::class.java)
 }
 
-fun createRepoImpl(api: ApiInterface, db: AppDb): RepoImpl {
-    return RepoImpl(api, db)
-}
+fun createCache(context: Context): Cache = Cache(context.cacheDir, 10 * 1024 * 1024)
 
-fun createGetStreamsUseCase(repo: RepoImpl): GetStreamsUseCase {
-    return GetStreamsUseCase(repo)
-}
+fun createRepoImpl(api: ApiInterface, db: AppDb): RepoImpl = RepoImpl(api, db)
 
-fun createGetBlocklistUseCase(repo: RepoImpl): GetBlocklistUseCase {
-    return GetBlocklistUseCase(repo)
-}
+fun createGetBlocklistUseCase(repo: RepoImpl): GetBlocklistUseCase = GetBlocklistUseCase(repo)
 
-fun createGetCategoriesUseCase(repo: RepoImpl): GetCategoriesUseCase {
-    return GetCategoriesUseCase(repo)
-}
+fun createGetCategoriesUseCase(repo: RepoImpl): GetCategoriesUseCase = GetCategoriesUseCase(repo)
 
-fun createGetCountriesUseCase(repo: RepoImpl): GetCountriesUseCase {
-    return GetCountriesUseCase(repo)
-}
+fun createGetCountriesUseCase(repo: RepoImpl): GetCountriesUseCase = GetCountriesUseCase(repo)
 
-fun createGetGuidesUseCase(repo: RepoImpl): GetGuidesUseCase {
-    return GetGuidesUseCase(repo)
-}
+fun createGetGuidesUseCase(repo: RepoImpl): GetGuidesUseCase = GetGuidesUseCase(repo)
 
-fun createGetChannelsUseCase(repo: RepoImpl): GetChannelsUseCase {
-    return GetChannelsUseCase(repo)
-}
+fun createGetChannelsUseCase(repo: RepoImpl): GetChannelsUseCase = GetChannelsUseCase(repo)
 
-fun createGetLanguagesUseCase(repo: RepoImpl): GetLanguagesUseCase {
-    return GetLanguagesUseCase(repo)
-}
+fun createGetLanguagesUseCase(repo: RepoImpl): GetLanguagesUseCase = GetLanguagesUseCase(repo)
 
-fun createGetRegionUseCase(repo: RepoImpl): GetRegionUseCase {
-    return GetRegionUseCase(repo)
-}
+fun createGetRegionUseCase(repo: RepoImpl): GetRegionUseCase = GetRegionUseCase(repo)
 
-fun createGetSubdivisionsUseCase(repo: RepoImpl): GetSubdivisionsUseCase {
-    return GetSubdivisionsUseCase(repo)
-}
+fun createGetStreamsUseCase(repo: RepoImpl): GetStreamsUseCase = GetStreamsUseCase(repo)
+
+fun createGetSubdivisionsUseCase(repo: RepoImpl): GetSubdivisionsUseCase =
+    GetSubdivisionsUseCase(repo)

@@ -8,9 +8,9 @@ import com.example.myptv.data.remote.model.Country
 import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
-import com.example.myptv.domain.base.UseCase
-import com.example.myptv.data.remote.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
+import com.example.myptv.domain.base.UseCase
+import com.example.myptv.domain.model.Stream
 
 class GetStreamsUseCase constructor(private val repo: RepoImpl) : UseCase<List<Stream>, Any?>() {
     override suspend fun run(params: Any?): List<Stream> {

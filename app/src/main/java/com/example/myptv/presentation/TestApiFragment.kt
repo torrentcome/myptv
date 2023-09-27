@@ -12,12 +12,12 @@ import com.example.myptv.databinding.FragmentFirstBinding
 import com.example.myptv.ext.isNetworkAvailable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TestApiFragment : Fragment() {
-    private var adapter: StreamsAdapter? = StreamsAdapter()
-    private val streamsViewModel: StreamsViewModel by viewModel()
-    private var _binding: FragmentFirstBinding? = null
 
-    // This property is only valid between onCreateView and onDestroyView.
+class TestApiFragment : Fragment() {
+    private val streamsViewModel: StreamsViewModel by viewModel()
+    private var adapter: StreamsAdapter? = null
+
+    private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,17 +30,20 @@ class TestApiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding){
+        with(binding) {
             buttonFirst.setOnClickListener {
                 val bundle = Bundle()
-                if (adapter?.list?.isEmpty() == true){
-
-                } else {
-                    bundle.putString("link", adapter?.list?.get(0)?.url)
-                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+                when {
+                    adapter?.list?.isEmpty() == true -> {}
+                    else -> {
+                        bundle.putString("link", adapter?.list?.get(0)?.url)
+                        findNavController().navigate(
+                            R.id.action_FirstFragment_to_SecondFragment,
+                            bundle
+                        )
+                    }
                 }
             }
-            recyclerView.adapter = adapter
         }
         with(streamsViewModel) {
             if (requireActivity().isNetworkAvailable()) {
@@ -49,7 +52,8 @@ class TestApiFragment : Fragment() {
                 Toast.makeText(requireActivity(), "no network available", Toast.LENGTH_SHORT).show()
             }
             streamsData.observe(requireActivity()) {
-                adapter?.list = it
+                adapter
+                // adapter?.list = it
             }
             messageData.observe(requireActivity()) {
                 Toast.makeText(requireActivity(), "###: $it :###", Toast.LENGTH_LONG).show()

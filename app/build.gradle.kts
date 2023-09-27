@@ -49,17 +49,19 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
 
-    val room_version = "2.5.2"
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
-    val koin_version = "3.1.6"
-    implementation("io.insert-koin:koin-android:$koin_version")
-    implementation("io.insert-koin:koin-android-compat:$koin_version")
-    implementation("io.insert-koin:koin-core:$koin_version")
-    testImplementation("io.insert-koin:koin-test:$koin_version")
+    val roomVersion = "2.5.2"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    val koinVersion = "3.1.6"
+    implementation("io.insert-koin:koin-android:$koinVersion")
+    implementation("io.insert-koin:koin-android-compat:$koinVersion")
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    testImplementation("io.insert-koin:koin-test:$koinVersion")
 
     // image
     implementation("io.coil-kt:coil:1.0.0")

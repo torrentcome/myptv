@@ -17,7 +17,7 @@ interface StreamDao {
     fun insertAll(list: List<Stream>): List<Long>
 
     @Query("SELECT * FROM stream_table")
-    fun loadAll(): MutableList<Stream>
+    fun loadAll(): List<Stream>
 
     @Delete
     fun delete(song: Stream)

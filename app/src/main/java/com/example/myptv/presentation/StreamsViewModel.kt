@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myptv.data.remote.model.Stream
+import com.example.myptv.domain.model.Stream
 import com.example.myptv.domain.GetStreamsUseCase
 import com.example.myptv.presentation.base.UseCaseResponse
 import kotlinx.coroutines.cancel
@@ -23,8 +23,7 @@ class StreamsViewModel constructor(private val getStreamsUseCase: GetStreamsUseC
             object : UseCaseResponse<List<Stream>> {
                 override fun onSuccess(result: List<Stream>) {
                     Log.i(TAG, "result size ${result.size}")
-                    Log.i(TAG, "result: $result")
-                    streamsData.value = result.subList(0, 20)
+                    streamsData.value = result
                 }
 
                 override fun onError(exception: Exception?) {

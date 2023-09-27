@@ -7,7 +7,7 @@ import com.example.myptv.data.remote.model.Country
 import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
-import com.example.myptv.data.remote.model.Stream
+import com.example.myptv.domain.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
 
 interface Repo {

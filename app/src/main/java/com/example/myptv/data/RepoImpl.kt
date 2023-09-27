@@ -11,6 +11,7 @@ import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.data.remote.model.Subdivision
+import com.example.myptv.domain.model.Stream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -48,11 +49,13 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
         return api.getChannels()
     }
 
-    override suspend fun getStreams() = withContext(Dispatchers.IO) {
-        val streams = api.getStreams()
-        streams.forEach {
-            db.streamDao.insert(Mapper.map(it))
+    override suspend fun getStreams(): List<Stream> {
+        return withContext(Dispatchers.IO) {
+            val streams = api.getStreams()
+            streams.forEach {
+                db.streamDao.insert(Mapper.map(it))
+            }
+            return@withContext db.streamDao.loadAll().map { Mapper.map(it) }
         }
-        streams
     }
 }
