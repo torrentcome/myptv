@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-
+    // androidx
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
@@ -55,19 +55,28 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 
-    // koin
     val koin_version = "3.1.6"
     implementation("io.insert-koin:koin-android:$koin_version")
     implementation("io.insert-koin:koin-android-compat:$koin_version")
     implementation("io.insert-koin:koin-core:$koin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
 
+    // image
     implementation("io.coil-kt:coil:1.0.0")
-    implementation ("com.google.code.gson:gson:2.9.0")
 
+    // parser
+    implementation("com.google.code.gson:gson:2.9.0")
+
+    // api
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.8.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")
+
+    // exo
+    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation("com.google.android.exoplayer:exoplayer-core:2.19.1")
+    implementation("com.google.android.exoplayer:exoplayer-dash:2.19.1")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.19.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
