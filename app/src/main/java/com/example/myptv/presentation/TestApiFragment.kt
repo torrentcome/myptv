@@ -33,8 +33,12 @@ class TestApiFragment : Fragment() {
         with(binding){
             buttonFirst.setOnClickListener {
                 val bundle = Bundle()
-                bundle.putString("link", adapter?.list?.get(0)?.url)
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+                if (adapter?.list?.isEmpty() == true){
+
+                } else {
+                    bundle.putString("link", adapter?.list?.get(0)?.url)
+                    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+                }
             }
             recyclerView.adapter = adapter
         }
