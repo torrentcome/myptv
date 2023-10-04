@@ -53,7 +53,7 @@ class TestApiFragment : Fragment() {
             }
             streamsData.observe(requireActivity()) {
                 adapter
-                // adapter?.list = it
+                adapter?.list = it
             }
             messageData.observe(requireActivity()) {
                 Toast.makeText(requireActivity(), "###: $it :###", Toast.LENGTH_LONG).show()

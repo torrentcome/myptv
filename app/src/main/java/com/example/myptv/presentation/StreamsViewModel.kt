@@ -23,7 +23,7 @@ class StreamsViewModel constructor(private val getStreamsUseCase: GetStreamsUseC
             object : UseCaseResponse<List<Stream>> {
                 override fun onSuccess(result: List<Stream>) {
                     Log.i(TAG, "result size ${result.size}")
-                    streamsData.value = result
+                    streamsData.value = result.subList(0, 20)
                 }
 
                 override fun onError(exception: Exception?) {

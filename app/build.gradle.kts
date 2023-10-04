@@ -40,28 +40,34 @@ android {
 }
 
 dependencies {
+    // android
+    implementation("com.android.support:multidex:1.0.3")
+
+    // google
+    implementation("com.google.android.material:material:1.9.0")
+
     // androidx
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("com.android.support:multidex:1.0.3")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
 
-    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    val lifecycle = "2.5.1"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle")
 
-    val roomVersion = "2.5.2"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$roomVersion")
+    val room = "2.5.2"
+    implementation("androidx.room:room-runtime:$room")
+    ksp("androidx.room:room-compiler:$room")
+    implementation("androidx.room:room-ktx:$room")
 
-    val koinVersion = "3.1.6"
-    implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-android-compat:$koinVersion")
-    implementation("io.insert-koin:koin-core:$koinVersion")
-    testImplementation("io.insert-koin:koin-test:$koinVersion")
+    val koin = "3.1.6"
+    implementation("io.insert-koin:koin-android:$koin")
+    implementation("io.insert-koin:koin-android-compat:$koin")
+    implementation("io.insert-koin:koin-core:$koin")
+    testImplementation("io.insert-koin:koin-test:$koin")
 
     // image
     implementation("io.coil-kt:coil:1.0.0")
