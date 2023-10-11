@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myptv.R
 import com.example.myptv.databinding.FragmentFirstBinding
+import com.example.myptv.domain.base.api.Resource
 import com.example.myptv.ext.isNetworkAvailable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,17 +47,12 @@ class TestApiFragment : Fragment() {
             }
         }
         with(streamsViewModel) {
-            if (requireActivity().isNetworkAvailable()) {
-                getStreams()
-            } else {
-                Toast.makeText(requireActivity(), "no network available", Toast.LENGTH_SHORT).show()
-            }
-            streamsData.observe(requireActivity()) {
-                adapter
-                adapter?.list = it
-            }
-            messageData.observe(requireActivity()) {
-                Toast.makeText(requireActivity(), "###: $it :###", Toast.LENGTH_LONG).show()
+            data.observe(requireActivity()) {
+                when(it.status){
+                    Resource.Status.SUCCESS -> adapter?.list = it.data ?: emptyList()
+                    Resource.Status.ERROR -> Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    Resource.Status.LOADING -> Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

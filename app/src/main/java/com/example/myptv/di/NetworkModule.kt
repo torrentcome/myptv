@@ -11,6 +11,7 @@ import com.example.myptv.domain.GetCountriesUseCase
 import com.example.myptv.domain.GetGuidesUseCase
 import com.example.myptv.domain.GetLanguagesUseCase
 import com.example.myptv.domain.GetRegionUseCase
+import com.example.myptv.domain.GetStreamsFlowUseCase
 import com.example.myptv.domain.GetStreamsUseCase
 import com.example.myptv.domain.GetSubdivisionsUseCase
 import okhttp3.Cache
@@ -69,6 +70,7 @@ fun createGetLanguagesUseCase(repo: RepoImpl): GetLanguagesUseCase = GetLanguage
 fun createGetRegionUseCase(repo: RepoImpl): GetRegionUseCase = GetRegionUseCase(repo)
 
 fun createGetStreamsUseCase(repo: RepoImpl): GetStreamsUseCase = GetStreamsUseCase(repo)
+fun createGetStreamsFlowUseCase(repo: RepoImpl): GetStreamsFlowUseCase = GetStreamsFlowUseCase(repo)
 
 fun createGetSubdivisionsUseCase(repo: RepoImpl): GetSubdivisionsUseCase =
     GetSubdivisionsUseCase(repo)

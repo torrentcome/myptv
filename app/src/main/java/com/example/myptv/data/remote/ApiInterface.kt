@@ -9,6 +9,8 @@ import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.data.remote.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
+import com.example.myptv.domain.base.api.ApiResponse
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 
 interface ApiInterface {
@@ -38,4 +40,6 @@ interface ApiInterface {
 
     @GET("streams.json")
     suspend fun getStreams(): List<Stream>
+    @GET("streams.json")
+     fun getStreamsFlow(): Flow<ApiResponse<List<Stream>>>
 }

@@ -10,11 +10,19 @@ import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.data.remote.model.Subdivision
 import com.example.myptv.domain.base.UseCase
+import com.example.myptv.domain.base.api.Resource
 import com.example.myptv.domain.model.Stream
+import kotlinx.coroutines.flow.Flow
 
 class GetStreamsUseCase constructor(private val repo: RepoImpl) : UseCase<List<Stream>, Any?>() {
     override suspend fun run(params: Any?): List<Stream> {
         return repo.getStreams()
+    }
+}
+
+class GetStreamsFlowUseCase constructor(private val repo: RepoImpl) {
+     fun run(): Flow<Resource<List<Stream>>> {
+        return repo.getStreamsFlow()
     }
 }
 class GetBlocklistUseCase constructor(private val repo: RepoImpl) : UseCase<List<Block>, Any?>() {

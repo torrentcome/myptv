@@ -9,6 +9,8 @@ import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.domain.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
+import com.example.myptv.domain.base.api.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface Repo {
     suspend fun getBlocklist(): List<Block>
@@ -28,4 +30,6 @@ interface Repo {
     suspend fun getChannels(): List<Channel>
 
     suspend fun getStreams(): List<Stream>
+
+    fun getStreamsFlow(): Flow<Resource<List<Stream>>>
 }

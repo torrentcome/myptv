@@ -11,8 +11,12 @@ import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.data.remote.model.Subdivision
+import com.example.myptv.domain.base.api.Resource
+import com.example.myptv.domain.base.repo.bound
 import com.example.myptv.domain.model.Stream
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
@@ -57,5 +61,16 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
             }
             return@withContext db.streamDao.loadAll().map { Mapper.map(it) }
         }
+    }
+
+    override fun getStreamsFlow(): Flow<Resource<List<Stream>>> {
+        return bound(
+            db = { db.streamDao.loadAllFlow() },
+            shouldFetchApi = { it == null },
+            api = { api.getStreamsFlow() },
+            mapRes = { streamList -> streamList.map { Mapper.map(it) } },
+            saveApi = { streamList -> db.streamDao.insertAll(streamList.map { Mapper.map(it) }) },
+            fetchFailed = { _, _ -> }
+        ).flowOn(Dispatchers.IO)
     }
 }
