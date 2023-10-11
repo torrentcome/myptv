@@ -10,6 +10,7 @@ val appModule = module {
 
     // network UseCases
     single { createGetStreamsUseCase(get()) }
+    single { createGetStreamsFlowUseCase(get()) }
     single { createGetBlocklistUseCase(get()) }
     single { createGetCategoriesUseCase(get()) }
     single { createGetCountriesUseCase(get()) }

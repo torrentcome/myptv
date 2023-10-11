@@ -66,7 +66,7 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
     override fun getStreamsFlow(): Flow<Resource<List<Stream>>> {
         return bound(
             db = { db.streamDao.loadAllFlow() },
-            shouldFetchApi = { it == null },
+            shouldFetchApi = { it?.isEmpty() == true },
             api = { api.getStreamsFlow() },
             mapRes = { streamList -> streamList.map { Mapper.map(it) } },
             saveApi = { streamList -> db.streamDao.insertAll(streamList.map { Mapper.map(it) }) },

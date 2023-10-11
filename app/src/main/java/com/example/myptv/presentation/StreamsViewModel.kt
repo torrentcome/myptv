@@ -11,9 +11,6 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.map
 
 class StreamsViewModel constructor(getStreamsFlowUseCase: GetStreamsFlowUseCase) : ViewModel() {
-    companion object {
-        private val TAG = StreamsViewModel::class.java.name
-    }
 
     val data: LiveData<Resource<List<Stream>>> = getStreamsFlowUseCase.run().map {
         when (it.status) {

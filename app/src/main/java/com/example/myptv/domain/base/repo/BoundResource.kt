@@ -1,5 +1,6 @@
 package com.example.myptv.domain.base.repo
 
+import android.util.Log
 import com.example.myptv.domain.base.api.ApiResponse
 import com.example.myptv.domain.base.api.Error
 import com.example.myptv.domain.base.api.Resource
@@ -20,20 +21,24 @@ inline fun <Db, Api, Domain> bound(
 ) = flow<Resource<Domain>> {
 
     emit(Resource.loading(null))
-
+    Log.i("bound","loading")
     val localData = db().first()
+    Log.i("bound","db().first() =" + localData.toString())
 
     if (shouldFetchApi(localData)) {
+        Log.i("bound","shouldFetchApi(localData) =")
         emit(Resource.loading(mapRes(localData)))
         api().collect { apiResponse ->
             when (apiResponse) {
                 is Success -> {
+                    Log.i("bound","Success")
                     apiResponse.body?.let { saveApi(it) }
                     val domainFlow: Flow<Domain> = db().map { dbData -> mapRes(dbData) }
                     emitAll(domainFlow.map { Resource.success(it) })
                 }
 
                 is Error -> {
+                    Log.i("bound","Error")
                     fetchFailed(apiResponse.errorMessage, apiResponse.statusCode)
                     val domainFlow: Flow<Domain> = db().map { dbData -> mapRes(dbData) }
                     emitAll(domainFlow.map {
@@ -44,6 +49,7 @@ inline fun <Db, Api, Domain> bound(
                     })
                 }
                 else -> {
+                    Log.i("bound","unknows")
                     fetchFailed("unkown", -1)
                     val domainFlow: Flow<Domain> = db().map { dbData -> mapRes(dbData) }
                     emitAll(domainFlow.map {
@@ -56,6 +62,7 @@ inline fun <Db, Api, Domain> bound(
             }
         }
     } else {
+        Log.i("bound","else")
         val domainFlow: Flow<Domain> = db().map { dbData -> mapRes(dbData) }
         emitAll(domainFlow.map { Resource.success(it) })
     }

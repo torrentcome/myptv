@@ -51,7 +51,7 @@ class TestApiFragment : Fragment() {
                 when(it.status){
                     Resource.Status.SUCCESS -> adapter?.list = it.data ?: emptyList()
                     Resource.Status.ERROR -> Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
-                    Resource.Status.LOADING -> Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                    Resource.Status.LOADING -> Toast.makeText(requireActivity(), "loading", Toast.LENGTH_SHORT).show()
                 }
             }
         }

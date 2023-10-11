@@ -70,6 +70,7 @@ fun createGetLanguagesUseCase(repo: RepoImpl): GetLanguagesUseCase = GetLanguage
 fun createGetRegionUseCase(repo: RepoImpl): GetRegionUseCase = GetRegionUseCase(repo)
 
 fun createGetStreamsUseCase(repo: RepoImpl): GetStreamsUseCase = GetStreamsUseCase(repo)
+
 fun createGetStreamsFlowUseCase(repo: RepoImpl): GetStreamsFlowUseCase = GetStreamsFlowUseCase(repo)
 
 fun createGetSubdivisionsUseCase(repo: RepoImpl): GetSubdivisionsUseCase =
