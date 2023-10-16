@@ -1,5 +1,6 @@
 package com.example.myptv.domain
 
+import com.example.myptv.data.Repo
 import com.example.myptv.data.RepoImpl
 import com.example.myptv.data.remote.model.Block
 import com.example.myptv.data.remote.model.Category
@@ -10,7 +11,7 @@ import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.data.remote.model.Subdivision
 import com.example.myptv.domain.base.UseCase
-import com.example.myptv.domain.base.api.Resource
+import com.example.myptv.domain.base.api.ResultData
 import com.example.myptv.domain.model.Stream
 import kotlinx.coroutines.flow.Flow
 
@@ -20,8 +21,8 @@ class GetStreamsUseCase constructor(private val repo: RepoImpl) : UseCase<List<S
     }
 }
 
-class GetStreamsFlowUseCase constructor(private val repo: RepoImpl) {
-     fun run(): Flow<Resource<List<Stream>>> {
+class GetStreamsFlowUseCase constructor(private val repo: Repo) {
+    suspend fun run(): Flow<ResultData<MutableList<Stream>>> {
         return repo.getStreamsFlow()
     }
 }

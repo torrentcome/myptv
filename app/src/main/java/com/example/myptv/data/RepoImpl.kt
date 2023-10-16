@@ -11,11 +11,13 @@ import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
 import com.example.myptv.data.remote.model.Subdivision
-import com.example.myptv.domain.base.api.Resource
-import com.example.myptv.domain.base.repo.bound
+import com.example.myptv.domain.base.api.ResultData
 import com.example.myptv.domain.model.Stream
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
@@ -63,14 +65,26 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
         }
     }
 
-    override fun getStreamsFlow(): Flow<Resource<List<Stream>>> {
-        return bound(
-            db = { db.streamDao.loadAllFlow() },
-            shouldFetchApi = { it?.isEmpty() == true },
-            api = { api.getStreamsFlow() },
-            mapRes = { streamList -> streamList.map { Mapper.map(it) } },
-            saveApi = { streamList -> db.streamDao.insertAll(streamList.map { Mapper.map(it) }) },
-            fetchFailed = { _, _ -> }
-        ).flowOn(Dispatchers.IO)
-    }
+    override suspend fun getStreamsFlow(): Flow<ResultData<MutableList<Stream>>> = flow {
+        emit(ResultData.Loading)
+
+        val response = api.getStreamsFlow()
+        val result = response.body()
+        if (result != null && response.isSuccessful) {
+            val toMutableList: MutableList<Stream> = result.map { remote ->
+                Mapper.map(remote)
+            }.map { local ->
+                db.streamDao.insert(local)
+                local
+            }.map { local ->
+                val domain = Mapper.map(local)
+                domain
+            }.toMutableList()
+            emit(ResultData.Success(toMutableList))
+        } else {
+            emit(ResultData.Message(response.message()))
+        }
+    }.catch {
+        emit(ResultData.Error(it))
+    }.flowOn(Dispatchers.IO)
 }
