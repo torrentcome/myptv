@@ -1,6 +1,7 @@
 package com.example.myptv.di
 
 import android.content.Context
+import com.example.myptv.data.Repo
 import com.example.myptv.data.RepoImpl
 import com.example.myptv.data.local.AppDb
 import com.example.myptv.data.remote.ApiInterface
@@ -53,25 +54,25 @@ fun createService(retrofit: Retrofit): ApiInterface {
 
 fun createCache(context: Context): Cache = Cache(context.cacheDir, 10 * 1024 * 1024)
 
-fun createRepoImpl(api: ApiInterface, db: AppDb): RepoImpl = RepoImpl(api, db)
+fun createRepoImpl(api: ApiInterface, db: AppDb): Repo = RepoImpl(api, db)
 
-fun createGetBlocklistUseCase(repo: RepoImpl): GetBlocklistUseCase = GetBlocklistUseCase(repo)
+fun createGetBlocklistUseCase(repo: Repo): GetBlocklistUseCase = GetBlocklistUseCase(repo)
 
-fun createGetCategoriesUseCase(repo: RepoImpl): GetCategoriesUseCase = GetCategoriesUseCase(repo)
+fun createGetCategoriesUseCase(repo: Repo): GetCategoriesUseCase = GetCategoriesUseCase(repo)
 
-fun createGetCountriesUseCase(repo: RepoImpl): GetCountriesUseCase = GetCountriesUseCase(repo)
+fun createGetCountriesUseCase(repo: Repo): GetCountriesUseCase = GetCountriesUseCase(repo)
 
-fun createGetGuidesUseCase(repo: RepoImpl): GetGuidesUseCase = GetGuidesUseCase(repo)
+fun createGetGuidesUseCase(repo: Repo): GetGuidesUseCase = GetGuidesUseCase(repo)
 
-fun createGetChannelsUseCase(repo: RepoImpl): GetChannelsUseCase = GetChannelsUseCase(repo)
+fun createGetChannelsUseCase(repo: Repo): GetChannelsUseCase = GetChannelsUseCase(repo)
 
-fun createGetLanguagesUseCase(repo: RepoImpl): GetLanguagesUseCase = GetLanguagesUseCase(repo)
+fun createGetLanguagesUseCase(repo: Repo): GetLanguagesUseCase = GetLanguagesUseCase(repo)
 
-fun createGetRegionUseCase(repo: RepoImpl): GetRegionUseCase = GetRegionUseCase(repo)
+fun createGetRegionUseCase(repo: Repo): GetRegionUseCase = GetRegionUseCase(repo)
 
-fun createGetStreamsUseCase(repo: RepoImpl): GetStreamsUseCase = GetStreamsUseCase(repo)
+fun createGetStreamsUseCase(repo: Repo): GetStreamsUseCase = GetStreamsUseCase(repo)
 
-fun createGetStreamsFlowUseCase(repo: RepoImpl): GetStreamsFlowUseCase = GetStreamsFlowUseCase(repo)
+fun createGetStreamsFlowUseCase(repo: Repo): GetStreamsFlowUseCase = GetStreamsFlowUseCase(repo)
 
-fun createGetSubdivisionsUseCase(repo: RepoImpl): GetSubdivisionsUseCase =
+fun createGetSubdivisionsUseCase(repo: Repo): GetSubdivisionsUseCase =
     GetSubdivisionsUseCase(repo)

@@ -1,5 +1,6 @@
 package com.example.myptv.data
 
+import android.util.Log
 import com.example.myptv.data.local.AppDb
 import com.example.myptv.data.map.Mapper
 import com.example.myptv.data.remote.ApiInterface
@@ -76,8 +77,8 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
             }.map { local ->
                 db.streamDao.insert(local)
                 local
-            }.map { local ->
-                val domain = Mapper.map(local)
+            }.map { local2 ->
+                val domain = Mapper.map(local2)
                 domain
             }.toMutableList()
             emit(ResultData.Success(toMutableList))

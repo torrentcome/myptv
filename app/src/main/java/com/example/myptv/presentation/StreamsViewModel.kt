@@ -1,5 +1,6 @@
 package com.example.myptv.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.example.myptv.domain.GetStreamsFlowUseCase
 import com.example.myptv.domain.base.api.ResultData
 import com.example.myptv.domain.model.Stream
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class StreamsViewModel constructor(private val repo: Repo) : ViewModel() {
@@ -33,7 +35,8 @@ class StreamsViewModel constructor(private val repo: Repo) : ViewModel() {
                     _loadingLiveData.value = true
                 }
                 is ResultData.Success -> {
-                    _successLiveData.value = it.data
+                    val e = it.data.take(20)
+                    _successLiveData.value = e.toMutableList()
                     _loadingLiveData.value = false
                 }
                 is ResultData.Message -> {
@@ -45,7 +48,7 @@ class StreamsViewModel constructor(private val repo: Repo) : ViewModel() {
                     _loadingLiveData.value = false
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 
     override fun onCleared() {
