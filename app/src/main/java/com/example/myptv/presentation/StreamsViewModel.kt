@@ -1,6 +1,5 @@
 package com.example.myptv.presentation
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +17,7 @@ class StreamsViewModel constructor(private val repo: Repo) : ViewModel() {
     private val _loadingLiveData = MutableLiveData<Boolean>()
     val loadingLiveData: LiveData<Boolean> get() = _loadingLiveData
 
-    internal val _successLiveData = MutableLiveData<MutableList<Stream>?>()
+    private val _successLiveData = MutableLiveData<MutableList<Stream>?>()
     val successLiveData: LiveData<MutableList<Stream>?> get() = _successLiveData
 
     private val _messageLiveData = MutableLiveData<String>()
@@ -35,8 +34,8 @@ class StreamsViewModel constructor(private val repo: Repo) : ViewModel() {
                     _loadingLiveData.value = true
                 }
                 is ResultData.Success -> {
-                    val e = it.data.take(20)
-                    _successLiveData.value = e.toMutableList()
+                    val streamList = it.data.take(20)
+                    _successLiveData.value = streamList.toMutableList()
                     _loadingLiveData.value = false
                 }
                 is ResultData.Message -> {

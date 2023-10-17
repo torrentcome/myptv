@@ -17,6 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorPrimaryVariant" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_streams" />

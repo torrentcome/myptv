@@ -28,4 +28,7 @@ interface StreamDao {
 
     @Update
     fun update(song: Stream)
+
+    @Query("SELECT COUNT(*) FROM stream_table")
+    fun getCount(): Int
 }

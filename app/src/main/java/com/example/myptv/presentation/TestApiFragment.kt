@@ -21,7 +21,9 @@ class TestApiFragment : Fragment() {
     private var adapter = StreamsAdapter()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -31,6 +33,7 @@ class TestApiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             recyclerView.adapter = adapter
+            progress.visibility = View.VISIBLE
             buttonFirst.setOnClickListener {
                 val bundle = Bundle()
                 when {
@@ -42,12 +45,19 @@ class TestApiFragment : Fragment() {
                     }
                 }
             }
-        }
-        with(streamsViewModel) {
-            lifecycleScope.launch { getData() }
-            _successLiveData.observe(requireActivity()) {
-                Log.i("myptv", "it = $it")
-                adapter.submitList(it)
+            with(streamsViewModel) {
+                lifecycleScope.launch { getData() }
+                successLiveData.observe(requireActivity()) {
+                    Log.i("myptv", "it = $it")
+                    progress.visibility = View.GONE
+                    adapter.submitList(it)
+                }
+                messageLiveData.observe(requireActivity()) {
+
+                }
+                errorLiveData.observe(requireActivity()) {
+
+                }
             }
         }
     }
