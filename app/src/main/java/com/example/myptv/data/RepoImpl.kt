@@ -68,7 +68,6 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
 
     override suspend fun getStreamsFlow(): Flow<ResultData<MutableList<Stream>>> = flow {
         emit(ResultData.Loading)
-
         val response = api.getStreamsFlow()
         val result = response.body()
         if (result != null && response.isSuccessful) {
@@ -76,16 +75,12 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
                 Mapper.map(remote)
             }.map { local ->
                 db.streamDao.insert(local)
-                local
-            }.map { local2 ->
-                val domain = Mapper.map(local2)
+                val domain = Mapper.map(local)
                 domain
             }.toMutableList()
             emit(ResultData.Success(toMutableList))
         } else {
             emit(ResultData.Message(response.message()))
         }
-    }.catch {
-        emit(ResultData.Error(it))
     }.flowOn(Dispatchers.IO)
 }

@@ -65,15 +65,15 @@ object Mapper {
     )
 
     fun map(stream: RemoteStream) = LocalStream (
-        channel = stream.channel.toString(),
         url = stream.url,
+        channel = stream.channel.toString(),
         httpReferrer = stream.httpReferrer,
         userAgent = stream.userAgent
     )
 
     fun map(stream: LocalStream) = DomainStream (
-        channel = stream.channel,
         url = stream.url,
+        channel = stream.channel,
         httpReferrer = stream.httpReferrer,
         userAgent = stream.userAgent
     )
