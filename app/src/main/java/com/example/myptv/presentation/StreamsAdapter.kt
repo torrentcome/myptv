@@ -2,13 +2,14 @@ package com.example.myptv.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myptv.databinding.RowLoadingBinding
 import com.example.myptv.domain.model.Stream
 import com.example.myptv.databinding.RowStreamBinding
 
-class StreamsAdapter : ListAdapter<Stream, StreamsAdapter.StreamViewHolder>(StreamDiff) {
+class StreamsAdapter : PagingDataAdapter<Stream, StreamsAdapter.StreamViewHolder>(StreamDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StreamViewHolder {
         return StreamViewHolder(
             RowStreamBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,10 +20,12 @@ class StreamsAdapter : ListAdapter<Stream, StreamsAdapter.StreamViewHolder>(Stre
         holder.bind(position)
     }
 
-    inner class StreamViewHolder(private val itemBinding : RowStreamBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class LoadStateViewHolder(val loadBinding: RowLoadingBinding) : RecyclerView.ViewHolder(binding.root)
+
+    inner class StreamViewHolder(private val streamBinding : RowStreamBinding) : RecyclerView.ViewHolder(streamBinding.root) {
         fun bind(position: Int) {
             val item = getItem(position)
-            itemBinding.textView.text = item.toString()
+            streamBinding.textView.text = item.toString()
         }
     }
 

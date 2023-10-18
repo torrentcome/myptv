@@ -58,6 +58,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle")
 
+    implementation ("androidx.paging:paging-runtime:3.1.1")
+
     val room = "2.5.2"
     implementation("androidx.room:room-runtime:$room")
     ksp("androidx.room:room-compiler:$room")

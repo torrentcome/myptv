@@ -32,4 +32,5 @@ interface Repo {
     suspend fun getStreams(): List<Stream>
 
     suspend fun getStreamsFlow(): Flow<ResultData<MutableList<Stream>>>
+    suspend fun getPagedList(loadSize: Int, i: Int): List<Stream>
 }

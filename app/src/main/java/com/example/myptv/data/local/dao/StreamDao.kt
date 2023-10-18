@@ -20,9 +20,6 @@ interface StreamDao {
     @Query("SELECT * FROM stream_table")
     fun loadAll(): List<Stream>
 
-    @Query("SELECT * FROM stream_table")
-    fun loadAllFlow(): Flow<List<Stream>>
-
     @Delete
     fun delete(song: Stream)
 
@@ -31,4 +28,8 @@ interface StreamDao {
 
     @Query("SELECT COUNT(*) FROM stream_table")
     fun getCount(): Int
+
+    @Query("SELECT * FROM stream_table ORDER BY url ASC LIMIT :limit OFFSET :offset")
+    fun getPagedList(limit: Int, offset: Int): List<Stream>
+
 }
