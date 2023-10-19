@@ -80,6 +80,9 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
             val result = response.body()
             if (result != null && response.isSuccessful) {
                 val toMutableList: MutableList<Stream> = result
+                    .filter { it.url.isNotEmpty()
+                            && it.url.endsWith(".m3u8")
+                            && !it.channel.isNullOrEmpty() }
                     .map { remote -> Mapper.map(remote) }
                     .map { local ->
                         db.streamDao.insert(local)

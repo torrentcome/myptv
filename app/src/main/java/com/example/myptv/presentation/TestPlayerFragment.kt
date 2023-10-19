@@ -1,6 +1,7 @@
 package com.example.myptv.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class TestPlayerFragment : Fragment() {
         }
 
         val url = arguments?.getString("url") ?: ""
+        Log.i("myptv", "url =$url")
         player = SimpleExoPlayer.Builder(requireContext().applicationContext).build()
         player?.let {
             binding.playerview.player = it

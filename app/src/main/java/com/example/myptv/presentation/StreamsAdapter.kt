@@ -1,6 +1,7 @@
 package com.example.myptv.presentation
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,6 +10,7 @@ import com.example.myptv.databinding.RowStreamBinding
 import com.example.myptv.domain.model.Stream
 
 class StreamsAdapter : ListAdapter<Stream, StreamsAdapter.StreamViewHolder>(StreamDiff) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StreamViewHolder {
         return StreamViewHolder(
             RowStreamBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,7 +25,12 @@ class StreamsAdapter : ListAdapter<Stream, StreamsAdapter.StreamViewHolder>(Stre
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(position: Int) {
             val item = getItem(position)
-            itemBinding.textView.text = item.toString()
+            itemBinding.textView.text = item.channel + " : " + item.url
+            itemBinding.textView.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener?.onClick(position)
+                }
+            }
         }
     }
 
@@ -37,4 +44,13 @@ class StreamsAdapter : ListAdapter<Stream, StreamsAdapter.StreamViewHolder>(Stre
                     && oldItem.httpReferrer == newItem.httpReferrer && oldItem.userAgent == newItem.userAgent
         }
     }
+
+    private var onClickListener: OnClickListener? = null
+    interface OnClickListener {
+        fun onClick(position: Int)
+    }
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
 }
