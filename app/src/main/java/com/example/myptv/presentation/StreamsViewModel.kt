@@ -34,7 +34,7 @@ class StreamsViewModel constructor(private val repo: Repo) : ViewModel() {
                     _loadingLiveData.value = true
                 }
                 is ResultData.Success -> {
-                    val streamList = it.data.take(20)
+                    val streamList = it.data.take(100)
                     _successLiveData.value = streamList.toMutableList()
                     _loadingLiveData.value = false
                 }

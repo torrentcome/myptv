@@ -40,7 +40,6 @@ class TestPlayerFragment : Fragment() {
         }
 
         val url = arguments?.getString("url") ?: ""
-
         player = SimpleExoPlayer.Builder(requireContext().applicationContext).build()
         player?.let {
             binding.playerview.player = it

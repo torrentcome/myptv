@@ -20,14 +20,17 @@ interface StreamDao {
     @Query("SELECT * FROM stream_table")
     fun loadAll(): List<Stream>
 
+    @Query("SELECT * FROM stream_table WHERE url LIKE :url")
+    fun load(url:String): List<Stream>
+
     @Query("SELECT * FROM stream_table")
     fun loadAllFlow(): Flow<List<Stream>>
 
     @Delete
-    fun delete(song: Stream)
+    fun delete(stream: Stream)
 
     @Update
-    fun update(song: Stream)
+    fun update(stream: Stream)
 
     @Query("SELECT COUNT(*) FROM stream_table")
     fun getCount(): Int

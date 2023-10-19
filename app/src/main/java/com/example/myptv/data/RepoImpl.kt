@@ -1,5 +1,6 @@
 package com.example.myptv.data
 
+import android.util.Log
 import com.example.myptv.data.local.AppDb
 import com.example.myptv.data.map.Mapper
 import com.example.myptv.data.remote.ApiInterface
@@ -18,7 +19,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
@@ -67,25 +67,30 @@ class RepoImpl(private val api: ApiInterface, private val db: AppDb) : Repo {
 
     override suspend fun getStreamsFlow(): Flow<ResultData<MutableList<Stream>>> = flow {
         emit(ResultData.Loading)
-        if (db.streamDao.getCount() > 5) {
-            db.streamDao.loadAllFlow().map { local ->
-
-            }
-        }
-        val response = api.getStreamsFlow()
-        val result = response.body()
-        if (result != null && response.isSuccessful) {
-            val toMutableList: MutableList<Stream> = result
-                .map { remote -> Mapper.map(remote) }
-                .map { local ->
-                    db.streamDao.insert(local)
-                    val domain = Mapper.map(local)
-                    domain
-                }
-                .toMutableList()
+        Log.i("myptv","Loading")
+        val count = db.streamDao.getCount()
+        if (count > 20) {
+            Log.i("myptv", "db.streamDao.getCount() = $count")
+            val toMutableList = db.streamDao.load("https://ythlsgo%").map { local ->
+                Mapper.map(local)
+            }.toMutableList()
             emit(ResultData.Success(toMutableList))
         } else {
-            emit(ResultData.Message(response.message()))
+            val response = api.getStreamsFlow()
+            val result = response.body()
+            if (result != null && response.isSuccessful) {
+                val toMutableList: MutableList<Stream> = result
+                    .map { remote -> Mapper.map(remote) }
+                    .map { local ->
+                        db.streamDao.insert(local)
+                        val domain = Mapper.map(local)
+                        domain
+                    }
+                    .toMutableList()
+                emit(ResultData.Success(toMutableList))
+            } else {
+                emit(ResultData.Message(response.message()))
+            }
         }
     }.catch {
         emit(ResultData.Error(it))

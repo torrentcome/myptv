@@ -7,9 +7,9 @@ import com.example.myptv.data.remote.model.Country
 import com.example.myptv.data.remote.model.Guide
 import com.example.myptv.data.remote.model.Language
 import com.example.myptv.data.remote.model.Region
-import com.example.myptv.domain.model.Stream
 import com.example.myptv.data.remote.model.Subdivision
 import com.example.myptv.domain.base.api.ResultData
+import com.example.myptv.domain.model.Stream
 import kotlinx.coroutines.flow.Flow
 
 interface Repo {

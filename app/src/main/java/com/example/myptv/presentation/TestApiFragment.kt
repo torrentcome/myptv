@@ -36,14 +36,13 @@ class TestApiFragment : Fragment() {
             progress.visibility = View.VISIBLE
             buttonFirst.setOnClickListener {
                 val bundle = Bundle()
-                when {
-                    else -> {
-                        findNavController().navigate(
-                            R.id.action_FirstFragment_to_SecondFragment,
-                            bundle
-                        )
-                    }
+                if(adapter.currentList.size > 0){
+                    bundle.putString("url", adapter.currentList[1].url)
                 }
+                findNavController().navigate(
+                    R.id.action_FirstFragment_to_SecondFragment,
+                    bundle
+                )
             }
             with(streamsViewModel) {
                 lifecycleScope.launch { getData() }
