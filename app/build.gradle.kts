@@ -58,9 +58,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle")
 
-    // bg
-    implementation ("androidx.work:work-runtime-ktx:2.8.1")
-
     val room = "2.5.2"
     implementation("androidx.room:room-runtime:$room")
     ksp("androidx.room:room-compiler:$room")
