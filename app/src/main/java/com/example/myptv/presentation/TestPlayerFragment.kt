@@ -20,17 +20,15 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 
 class TestPlayerFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private lateinit var binding: FragmentSecondBinding
     private var player: ExoPlayer? = null
-
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -64,6 +62,5 @@ class TestPlayerFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         releasePlayer()
-        _binding = null
     }
 }

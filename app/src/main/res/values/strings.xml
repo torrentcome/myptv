@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">myptv</string>
-    <string name="title_activity_streams">Streams Activity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="app_name">Myptv</string>
+    <string name="title_activity_streams">Myptv</string>
+
+    <string name="first_fragment_label">First : Api</string>
+    <string name="second_fragment_label">Second : Player</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
