@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myptv.R
 import com.example.myptv.databinding.ActivityStreamsBinding
 
-class StreamsActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityStreamsBinding
